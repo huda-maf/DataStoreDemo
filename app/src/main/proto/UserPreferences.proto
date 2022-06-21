@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "h.shafoot.datastoredemo" ;
+option java_multiple_files = true ;
+
+message UserPreferences {
+
+  bool didParkingOnBoardingShown = 1;
+
+  string name = 2;
+
+  string note = 3;
+
+}
