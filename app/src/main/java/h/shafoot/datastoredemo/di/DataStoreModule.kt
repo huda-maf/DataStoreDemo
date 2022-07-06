@@ -17,6 +17,8 @@ import dagger.hilt.components.SingletonComponent
 import h.shafoot.datastoredemo.UserPreferences
 import h.shafoot.datastoredemo.data.preferences.prefsstore.PrefsStore
 import h.shafoot.datastoredemo.data.preferences.prefsstore.PrefsStoreImpl
+import h.shafoot.datastoredemo.data.preferences.protostore.ProtoStore
+import h.shafoot.datastoredemo.data.preferences.protostore.ProtoStoreImpl
 import h.shafoot.datastoredemo.data.preferences.protostore.UserPreferencesSerializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,8 +52,14 @@ class DataStoreModule {
 
     @Provides
     @Singleton
-    fun providePrefsStoreUtils(dataStore: DataStore<Preferences>): PrefsStore {
+    fun providePrefsStore(dataStore: DataStore<Preferences>): PrefsStore {
         return PrefsStoreImpl(dataStore)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProtoStore(dataStore: DataStore<UserPreferences>): ProtoStore {
+        return ProtoStoreImpl(dataStore)
     }
 
 }
