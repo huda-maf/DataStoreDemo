@@ -14,12 +14,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import h.shafoot.datastoredemo.UserPreferences
+import h.shafoot.datastoredemo.AppPreferences
 import h.shafoot.datastoredemo.data.preferences.prefsstore.PrefsStore
 import h.shafoot.datastoredemo.data.preferences.prefsstore.PrefsStoreImpl
+import h.shafoot.datastoredemo.data.preferences.protostore.AppPreferencesSerializer
 import h.shafoot.datastoredemo.data.preferences.protostore.ProtoStore
 import h.shafoot.datastoredemo.data.preferences.protostore.ProtoStoreImpl
-import h.shafoot.datastoredemo.data.preferences.protostore.UserPreferencesSerializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -34,19 +34,15 @@ class DataStoreModule {
     fun providePreferencesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
                 ReplaceFileCorruptionHandler { emptyPreferences() },
-                //migrations = listOf(SharedPreferencesMigration(context, "shafoot.h.myevents_prefernces")),
                 scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-                produceFile = { context.preferencesDataStoreFile("demo_store_prefs.pb") })
+                produceFile = { context.preferencesDataStoreFile("demo_preferences_data_store") })
     }
 
     @Provides
     @Singleton
-    fun provideProtoDataStore(@ApplicationContext context : Context) : DataStore<UserPreferences> {
+    fun provideProtoDataStore(@ApplicationContext context : Context) : DataStore<AppPreferences> {
         return DataStoreFactory.create(
-                serializer = UserPreferencesSerializer, produceFile = { context.dataStoreFile("") },/* migrations = listOf(SharedPreferencesMigration(context, "prefs name") {
-            sharedPrefs : SharedPreferencesView, currentData : UserPreferences -> // mapping shared prefs to userprefs
-            if (currentData.sortOrder ==)
-        })*/
+                serializer = AppPreferencesSerializer, produceFile = { context.dataStoreFile("demo_proto_data_store") },
         )
     }
 
@@ -58,7 +54,7 @@ class DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideProtoStore(dataStore: DataStore<UserPreferences>): ProtoStore {
+    fun provideProtoStore(dataStore: DataStore<AppPreferences>): ProtoStore {
         return ProtoStoreImpl(dataStore)
     }
 

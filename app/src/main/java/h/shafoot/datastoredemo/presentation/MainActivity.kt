@@ -1,13 +1,14 @@
 package h.shafoot.datastoredemo.presentation
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import h.shafoot.datastoredemo.R
 import h.shafoot.datastoredemo.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -19,21 +20,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        observe()
+        collect()
         initListeners()
     }
 
-    private fun observe() {
-        viewModel.name.observe(this) {
-            binding.name = it
-            Toast.makeText(this,it,Toast.LENGTH_LONG).show()
+    private fun collect() {
+        lifecycleScope.launch {
+            launch {
+                viewModel.name.collect {
+                    binding.name = it
+                }
+            }
+            launch {
+                viewModel.note.collect {
+                    binding.note = it
+                }
+            }
         }
-
-        viewModel.note.observe(this) {
-            binding.note = it
-            Toast.makeText(this,it,Toast.LENGTH_LONG).show()
-        }
-
     }
 
     private fun initListeners() {
@@ -42,14 +45,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.setNote(binding.notePrefEditText.text.toString())
         }
 
-        binding.storeProtoButton.setOnClickListener {
-            viewModel.setName(binding.nameEditText.text.toString())
-            viewModel.setName(binding.noteEditText.text.toString())
-        }
-
-        viewModel.nameProto.value?.name
-
     }
-
 
 }

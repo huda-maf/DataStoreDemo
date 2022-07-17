@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package = "h.shafoot.datastoredemo" ;
+option java_multiple_files = true ;
+
+message AppPreferences {
+
+  bool didParkingOnBoardingShown = 1;
+
+  repeated string branches = 2;
+
+  string preferredBranchId = 3;
+
+  message Configuration {
+
+    string version = 1;
+
+    string appUrl = 2;
+
+  }
+
+  Configuration configuration = 4;
+
+}

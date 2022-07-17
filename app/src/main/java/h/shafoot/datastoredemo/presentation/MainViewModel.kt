@@ -1,7 +1,6 @@
 package h.shafoot.datastoredemo.presentation
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import h.shafoot.datastoredemo.data.preferences.prefsstore.PrefsStore
@@ -12,9 +11,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val prefsStore : PrefsStore,private val protoStore : ProtoStore) : ViewModel() {
 
-    val name = prefsStore.getName().asLiveData()
+    val name = prefsStore.getName()
 
-    val note = prefsStore.getNote().asLiveData()
+    val note = prefsStore.getNote()
 
     fun setName(text : String) {
         viewModelScope.launch {
@@ -28,6 +27,6 @@ class MainViewModel @Inject constructor(private val prefsStore : PrefsStore,priv
         }
     }
 
-    val nameProto = protoStore.userPreferences.asLiveData()
+    val appPreferences = protoStore.appPreferences
 
 }

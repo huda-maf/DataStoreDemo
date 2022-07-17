@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <data><variable name="name" type="String" /><variable name="note" type="String" /></data>
+    <data>
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="note"
+            type="String" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.MainActivity">
-<!--TODO: Just-->
+
         <TextView
             android:id="@+id/preferencesTitle"
             android:layout_width="wrap_content"
@@ -55,74 +65,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notePrefEditText" />
 
-
-        <Button
-            android:id="@+id/retrievePrefButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="retrieve"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/storePrefButton" />
-
         <TextView
-            android:id="@+id/protoTitle"
+            android:id="@+id/nameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            android:text="Proto Data Store!"
+            android:text="Name"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/retrievePrefButton" />
+            app:layout_constraintStart_toStartOf="@id/namePrefEditText"
+            app:layout_constraintTop_toBottomOf="@id/storePrefButton" />
 
-        <EditText
-            android:id="@+id/nameEditText"
+        <TextView
+            android:id="@+id/nameTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/protoTitle" />
+            android:layout_marginTop="36dp"
+            android:text="@{name}"
+            android:textSize="16sp"
+            android:layout_marginStart="22dp"
+            app:layout_constraintStart_toEndOf="@id/nameTitle"
+            app:layout_constraintTop_toBottomOf="@id/storePrefButton" />
 
-        <EditText
-            android:id="@+id/noteEditText"
+        <TextView
+            android:id="@+id/noteTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Note"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameEditText" />
+            android:layout_marginTop="36dp"
+            android:text="Note"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/namePrefEditText"
+            app:layout_constraintTop_toBottomOf="@id/nameTitle" />
 
-        <Button
-            android:id="@+id/storeProtoButton"
+        <TextView
+            android:id="@+id/noteTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="save"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/noteEditText" />
+            android:layout_marginTop="36dp"
+            android:text="@{note}"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/nameTxt"
+            app:layout_constraintTop_toBottomOf="@id/nameTitle" />
 
-
-        <Button
-            android:id="@+id/retrieveProtoButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="retrieve"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/storeProtoButton" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
